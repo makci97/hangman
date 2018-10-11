@@ -15,7 +15,11 @@ class Hangman:
             self.word = np.random.choice(file.readlines()).strip()
 
     def letter_checker(self, letter):
-        return len(letter) != 1 or not letter.isalpha() or letter in self.letters
+        return (
+            len(letter) != 1 or not
+            letter.isalpha() or
+            letter in self.letters
+        )
 
     def add_letter(self, letter):
         self.letters.add(letter)
@@ -25,7 +29,9 @@ class Hangman:
             print('Hit!')
         else:
             self.mistakes += 1
-            print('Missed, mistake {} out of {}.'.format(self.mistakes, self.MAX_MISTAKES))
+            print('Missed, mistake {} out of {}.'.format(
+                self.mistakes, self.MAX_MISTAKES
+            ))
         return self.mistakes
 
     def final_decision(self):
@@ -33,7 +39,9 @@ class Hangman:
             print('You lost!')
             return True
 
-        print('The word:', ''.join([l if l in self.letters else '*' for l in self.word]))
+        print('The word:', ''.join([
+            l if l in self.letters else '*' for l in self.word
+        ]))
         if {l for l in self.word}.issubset(self.letters):
             print('You won!')
             return True
